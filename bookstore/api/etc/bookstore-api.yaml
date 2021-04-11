@@ -1,3 +1,14 @@
 Name: bookstore-api
 Host: 0.0.0.0
 Port: 8888
+
+Add:
+  Etcd:
+    Hosts:
+      - 47.115.13.137:4001
+    Key: add.rpc
+Check:
+  Etcd:
+    Hosts:
+      - 47.115.13.137:4001
+    Key: check.rpc
