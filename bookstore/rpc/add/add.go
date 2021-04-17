@@ -1,8 +1,8 @@
 package main
 
 import (
-	"flag"
 	"fmt"
+	"os"
 
 	"bookstore/rpc/add/add"
 	"bookstore/rpc/add/internal/config"
@@ -14,13 +14,15 @@ import (
 	"google.golang.org/grpc"
 )
 
-var configFile = flag.String("f", "etc/add.yaml", "the config file")
-
 func main() {
-	flag.Parse()
+	pwd, err := os.Getwd()
+	if err != nil {
+		panic(err)
+	}
+	configFile := pwd + "/rpc/add/etc/add.yaml"
 
 	var c config.Config
-	conf.MustLoad(*configFile, &c)
+	conf.MustLoad(configFile, &c)
 	ctx := svc.NewServiceContext(c)
 	srv := server.NewAdderServer(ctx)
 

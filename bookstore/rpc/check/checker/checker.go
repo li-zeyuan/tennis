@@ -3,7 +3,7 @@
 
 //go:generate mockgen -destination ./check_mock.go -package checkclient -source $GOFILE
 
-package checkclient
+package checker
 
 import (
 	"context"

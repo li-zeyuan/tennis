@@ -1,8 +1,8 @@
 package main
 
 import (
-	"flag"
 	"fmt"
+	"os"
 
 	"bookstore/rpc/check/check"
 	"bookstore/rpc/check/internal/config"
@@ -14,13 +14,16 @@ import (
 	"google.golang.org/grpc"
 )
 
-var configFile = flag.String("f", "etc/check.yaml", "the config file")
 
 func main() {
-	flag.Parse()
+	pwd, err := os.Getwd()
+	if err != nil {
+		panic(err)
+	}
+	configFile := pwd + "/rpc/check/etc/check.yaml"
 
 	var c config.Config
-	conf.MustLoad(*configFile, &c)
+	conf.MustLoad(configFile, &c)
 	ctx := svc.NewServiceContext(c)
 	srv := server.NewCheckServer(ctx)
 

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"flag"
 	"fmt"
+	"os"
 
 	"bookstore/api/internal/config"
 	"bookstore/api/internal/handler"
@@ -12,13 +12,16 @@ import (
 	"github.com/tal-tech/go-zero/rest"
 )
 
-var configFile = flag.String("f", "etc/bookstore-api.yaml", "the config file")
 
 func main() {
-	flag.Parse()
+	pwd, err := os.Getwd()
+	if err != nil {
+		panic(err)
+	}
+	configFile := pwd + "/api/etc/bookstore-api.yaml"
 
 	var c config.Config
-	conf.MustLoad(*configFile, &c)
+	conf.MustLoad(configFile, &c)
 
 	ctx := svc.NewServiceContext(c)
 	server := rest.MustNewServer(c.RestConf)
