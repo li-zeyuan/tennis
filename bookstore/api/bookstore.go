@@ -12,7 +12,6 @@ import (
 	"github.com/tal-tech/go-zero/rest"
 )
 
-
 func main() {
 	pwd, err := os.Getwd()
 	if err != nil {

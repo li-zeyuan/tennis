@@ -10,6 +10,7 @@ import (
 	"bookstore/rpc/check/internal/svc"
 
 	"github.com/tal-tech/go-zero/core/conf"
+	"github.com/tal-tech/go-zero/core/logx"
 	"github.com/tal-tech/go-zero/zrpc"
 	"google.golang.org/grpc"
 )
@@ -25,12 +26,12 @@ func main() {
 	var c config.Config
 	conf.MustLoad(configFile, &c)
 	ctx := svc.NewServiceContext(c)
-	srv := server.NewCheckServer(ctx)
+	checkerSrv := server.NewCheckerServer(ctx)
 
-	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
-		check.RegisterCheckServer(grpcServer, srv)
+	s, err := zrpc.NewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
+		check.RegisterCheckerServer(grpcServer, checkerSrv)
 	})
-	defer s.Stop()
+	logx.Must(err)
 
 	fmt.Printf("Starting rpc server at %s...\n", c.ListenOn)
 	s.Start()

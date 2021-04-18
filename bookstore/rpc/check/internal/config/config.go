@@ -8,5 +8,5 @@ import (
 type Config struct {
 	zrpc.RpcServerConf
 	DataSource string
-	Cache cache.CacheConf
+	Cache      cache.CacheConf
 }

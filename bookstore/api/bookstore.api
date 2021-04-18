@@ -1,24 +1,22 @@
-syntax = "v1"
-
 type (
 	addReq {
-		Book  string `form:"book"`
-		Price int64  `form:"price"`
+		book string `form:"book"`
+		price int64 `form:"price"`
 	}
-
+	
 	addResp {
-		Ok bool `json:"ok"`
+		ok bool `json:"ok"`
 	}
 )
 
 type (
 	checkReq {
-		Book string `form:"book"`
+		book string `form:"book"`
 	}
-
+	
 	checkResp {
-		Found bool  `json:"found"`
-		Price int64 `json:"price"`
+		found bool `json:"found"`
+		price int64 `json:"price"`
 	}
 )
 

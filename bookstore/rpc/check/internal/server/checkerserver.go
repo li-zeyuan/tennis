@@ -11,17 +11,17 @@ import (
 	"bookstore/rpc/check/internal/svc"
 )
 
-type CheckServer struct {
+type CheckerServer struct {
 	svcCtx *svc.ServiceContext
 }
 
-func NewCheckServer(svcCtx *svc.ServiceContext) *CheckServer {
-	return &CheckServer{
+func NewCheckerServer(svcCtx *svc.ServiceContext) *CheckerServer {
+	return &CheckerServer{
 		svcCtx: svcCtx,
 	}
 }
 
-func (s *CheckServer) Check(ctx context.Context, in *check.CheckReq) (*check.CheckResp, error) {
+func (s *CheckerServer) Check(ctx context.Context, in *check.CheckReq) (*check.CheckResp, error) {
 	l := logic.NewCheckLogic(ctx, s.svcCtx)
 	return l.Check(in)
 }
