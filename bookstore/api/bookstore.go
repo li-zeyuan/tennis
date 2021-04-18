@@ -19,7 +19,6 @@ func main() {
 		panic(err)
 	}
 	configFile := pwd + "/api/etc/bookstore-api.yaml"
-
 	var c config.Config
 	conf.MustLoad(configFile, &c)
 
